@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Available Donors</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h2>Matching Donors</h2>
+  <ul>
+    {% for donor in donors %}
+      <li>
+        {{ donor["name"] }} (Age: {{ donor["age"] }}) - 
+        <a href="tel:{{ donor['phone'] }}">📞 Call Now</a>
+      </li>
+    {% else %}
+      <li>No donors found for this blood group.</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
