@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Receiver Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="card p-4 shadow-lg">
+            <h2 class="text-center text-danger">Receiver Form</h2>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{category}} mt-3">{{ message }}</div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+
+            <form method="POST">
+                <input type="text" name="name" class="form-control mb-2" placeholder="Full Name" required>
+                <input type="number" name="age" class="form-control mb-2" placeholder="Age" required>
+                
+                <select name="gender" class="form-control mb-2" required>
+                    <option value="">Select Gender</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
+                
+                <select name="blood_group" class="form-control mb-2" required>
+                    <option value="">Select Blood Group</option>
+                    <option>A+</option><option>A-</option>
+                    <option>B+</option><option>B-</option>
+                    <option>O+</option><option>O-</option>
+                    <option>AB+</option><option>AB-</option>
+                </select>
+
+                <button type="submit" class="btn btn-danger w-100">Search Donors</button>
+            </form>
+        </div>
+
+        {% if donors %}
+        <div class="card mt-4 p-4 shadow-lg">
+            <h3 class="text-center text-success">Matching Donors</h3>
+            <table class="table table-bordered mt-3">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Name</th><th>Age</th><th>Gender</th><th>Phone</th><th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for donor in donors %}
+                    <tr>
+                        <td>{{ donor.name }}</td>
+                        <td>{{ donor.age }}</td>
+                        <td>{{ donor.gender }}</td>
+                        <td>{{ donor.phone }}</td>
+                        <td>{{ donor.email }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
